@@ -57,11 +57,11 @@ A quantidade de observações reduz bastante, porém facilita as próximas anál
 unique(dados$estadoTeste)
 ```
 
-A *estadoTeste* indica a fase do acompanhamento realizado. Com interesse em trabalhar apenas com os casos **Concluído** será possível analisar a quantia de `r length(dados$estadoTeste[dados$estadoTeste == "Concluído"])` observações. 
+A *estadoTeste* indica a fase do acompanhamento realizado. Com interesse em trabalhar apenas com os casos *Concluído* será possível analisar a quantia de `r length(dados$estadoTeste[dados$estadoTeste == "Concluído"])` observações. 
 
 #### Variável: tipoTeste
 
-Os teste se dividem em três grupos, **Molecular** sendo os PCR(proteína C-reativa), **Imunológico** que são os sorológicos e os **Testes rápidos**.
+Os teste se dividem em três grupos, *Molecular* sendo os PCR(proteína C-reativa), *Imunológico* que são os sorológicos e os *Testes rápidos*.
 
 A baixo, segue a tabela de frequência dos tipos de testes:
 
@@ -84,7 +84,7 @@ unique(year(dados$dataTeste))
 unique(year(dados$dataEncerramento))
 ```
 
-Perceba que existe ocorrência de teste realizado no ano de 1970/2000/2002 na coluna *dataTeste*, e  2002/2019/2011/2010 na coluna *dataEncerramento*. Na coluna da dato de teste possivelmente foi preenchido incorretamente ano de nascimento no lugar da data do teste. Já para a data de encerramento, possivelmente ocorreu erros de digitação, dados que o acompanhamento dos casos de Covid-19 ocorreu no inicio do ano de 2020. Para filtrar melhor os dados e evitar **outliers**, retira-se esses valores.
+Perceba que existe ocorrência de teste realizado no ano de 1970/2000/2002 na coluna *dataTeste*, e  2002/2019/2011/2010 na coluna *dataEncerramento*. Na coluna da dato de teste possivelmente foi preenchido incorretamente ano de nascimento no lugar da data do teste. Já para a data de encerramento, possivelmente ocorreu erros de digitação, dados que o acompanhamento dos casos de Covid-19 ocorreu no inicio do ano de 2020. Para filtrar melhor os dados e evitar *outliers*, retira-se esses valores.
 
 ```{r ajuste, echo=TRUE, warning=FALSE, message=FALSE}
 dados <- dados[!year(dados$dataTeste)=="1970",]
@@ -103,8 +103,7 @@ unique(year(dados$dataTeste))
 unique(year(dados$dataEncerramento))
 ```
 
-Feitos esses ajuste, é possivel identificar que o registro mais antigo nos registro de acompanhamento é de `r dados$dataTeste[order(dados$dataTeste)[1]]
-` sendo o ultimo em `r dados$dataTeste[order(dados$dataTeste)[nrow(dados)]]`. Fica facil de visualizar a frequência acumulada pelo gráfico aseguir:  
+Feitos esses ajuste, é possivel identificar que o registro mais antigo nos registro de acompanhamento é de `r dados$dataTeste[order(dados$dataTeste)[1]]` sendo o ultimo em `r dados$dataTeste[order(dados$dataTeste)[nrow(dados)]]`. Fica facil de visualizar a frequência acumulada pelo gráfico aseguir:  
 
 ```{r barplot teste, echo=TRUE, warning=FALSE, message=FALSE}
 barplot(table(year(dados$dataTeste)),
@@ -117,7 +116,7 @@ barplot(table(year(dados$dataTeste)),
 
 Pela coluna *estadoNotificacao* é possivel visualizar a origem dos individuoes dos quais se fez acompanhamento no estado do Paraná.
 
-Usando uma ferramenta de construção de mapas simples no R, com a biblioteca `rgdal`, com recursos gráficos para **shapes** e de forma gratuita disponibilizado pelo IBGE, é possível visualizar que na amostra de dados consta acompanhamento para pessoas oriundas de todo o País, com predominância de dados para o estado do Paraná com `r length(dados$estadoNotificacao[dados$estadoNotificacao == "PARANÁ"])` observações.
+Usando uma ferramenta de construção de mapas simples no R, com a biblioteca `rgdal`, com recursos gráficos para *shapes* e de forma gratuita disponibilizado pelo IBGE, é possível visualizar que na amostra de dados consta acompanhamento para pessoas oriundas de todo o País, com predominância de dados para o estado do Paraná com `r length(dados$estadoNotificacao[dados$estadoNotificacao == "PARANÁ"])` observações.
 
 ```{r mapa, echo=TRUE, warning=FALSE, message=FALSE}
 library(rgdal)
@@ -159,7 +158,7 @@ leaflet(data = brasileiropg) %>%
 
 #### Variável: idade e sexo
 
-Ainda existe mais divergência nos dados amostrado no banco de dados, nos valores indicado no campo idade, tendo um intervalor de `min(range(dados$idade))` a `max(range(dados$idade))`, o que não é possível no mundo real.
+Ainda existe mais divergência nos dados amostrado no banco de dados, nos valores indicado no campo idade, tendo um intervalor de `r min(range(dados$idade))` a `r max(range(dados$idade))`, o que não é possível no mundo real.
 
 Para fins de conformidade adota-se como idade máxima 100 anos.
 Agrupa-se os gêneros e os relaciona a idade para visualizar gráficamente por meio da função `boxplot()` as características como mediana, amplitude de idades máximas e mínimas e ainda representada per quartis.  
@@ -179,6 +178,7 @@ hist(dados$idade, xlab = "Idade", ylab = "Densidade", main = "Histograma de Idad
 ## Conclusão
 
 A base de dados traz um número significativo de registros, embora boa parte da integridade das observações fique comprometida devido a falta de rigor quanto o preenchimento e omissão das variáveis.
-O que pode criar barreiras e dificuldades para a análise correta de correlação.
+O que pode criar barreiras e dificuldades para a análise correta de correlações e inferências.
 
 A observação dos dados exibido até aqui, possibilita uma prévia compreensão do comportamento dos casos de COVID-19 no Paraná, no período observado, esta análise descritiva é importante no que diz respeito aos estudos cientifico e análise estatística com fins de tomada de decisões. 
+

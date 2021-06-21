@@ -92,14 +92,13 @@ unique(dados$estadoTeste)
     ## Levels:  Coletado Concluído Exame Não Solicitado null Solicitado
 
 A *estadoTeste* indica a fase do acompanhamento realizado. Com interesse
-em trabalhar apenas com os casos **Concluído** será possível analisar a
+em trabalhar apenas com os casos *Concluído* será possível analisar a
 quantia de 149299 observações.
 
 #### Variável: tipoTeste
 
-Os teste se dividem em três grupos, **Molecular** sendo os PCR(proteína
-C-reativa), **Imunológico** que são os sorológicos e os **Testes
-rápidos**.
+Os teste se dividem em três grupos, *Molecular* sendo os PCR(proteína
+C-reativa), *Imunológico* que são os sorológicos e os *Testes rápidos*.
 
 A baixo, segue a tabela de frequência dos tipos de testes:
 
@@ -129,8 +128,8 @@ Perceba que existe ocorrência de teste realizado no ano de
 preenchido incorretamente ano de nascimento no lugar da data do teste.
 Já para a data de encerramento, possivelmente ocorreu erros de
 digitação, dados que o acompanhamento dos casos de Covid-19 ocorreu no
-inicio do ano de 2020. Para filtrar melhor os dados e evitar
-**outliers**, retira-se esses valores.
+inicio do ano de 2020. Para filtrar melhor os dados e evitar *outliers*,
+retira-se esses valores.
 
 ``` r
 dados <- dados[!year(dados$dataTeste)=="1970",]
@@ -176,7 +175,7 @@ Pela coluna *estadoNotificacao* é possivel visualizar a origem dos
 individuoes dos quais se fez acompanhamento no estado do Paraná.
 
 Usando uma ferramenta de construção de mapas simples no R, com a
-biblioteca `rgdal`, com recursos gráficos para **shapes** e de forma
+biblioteca `rgdal`, com recursos gráficos para *shapes* e de forma
 gratuita disponibilizado pelo IBGE, é possível visualizar que na amostra
 de dados consta acompanhamento para pessoas oriundas de todo o País, com
 predominância de dados para o estado do Paraná com 147250 observações.
@@ -230,9 +229,8 @@ leaflet(data = brasileiropg) %>%
 #### Variável: idade e sexo
 
 Ainda existe mais divergência nos dados amostrado no banco de dados, nos
-valores indicado no campo idade, tendo um intervalor de
-`min(range(dados$idade))` a `max(range(dados$idade))`, o que não é
-possível no mundo real.
+valores indicado no campo idade, tendo um intervalor de 0 a 5980, o que
+não é possível no mundo real.
 
 Para fins de conformidade adota-se como idade máxima 100 anos. Agrupa-se
 os gêneros e os relaciona a idade para visualizar gráficamente por meio
@@ -261,7 +259,8 @@ hist(dados$idade, xlab = "Idade", ylab = "Densidade", main = "Histograma de Idad
 A base de dados traz um número significativo de registros, embora boa
 parte da integridade das observações fique comprometida devido a falta
 de rigor quanto o preenchimento e omissão das variáveis. O que pode
-criar barreiras e dificuldades para a análise correta de correlação.
+criar barreiras e dificuldades para a análise correta de correlações e
+inferências.
 
 A observação dos dados exibido até aqui, possibilita uma prévia
 compreensão do comportamento dos casos de COVID-19 no Paraná, no período
