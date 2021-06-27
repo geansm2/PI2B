@@ -29,6 +29,8 @@ Para facilitar o processo de importação dos dados da planilha no formato
 ``` r
 library(dplyr)
 dados <- read.csv("dados-pr-1.csv", header = TRUE , sep = ';')
+#link<- c("https://s3-sa-east-1.amazonaws.com/ckan.saude.gov.br/dados-pr-1.csv")
+#dados <- read.csv(link, header = TRUE , sep = ';')
 ```
 
 Filtram-se as variáveis de interesse.
@@ -77,7 +79,30 @@ contém essa característica.
 dados[dados==""]<- NA
 dados[dados=="null"]<- NA
 dados <- na.omit(dados)
+head(dados)
 ```
+
+    ##       estadoTeste                dataTeste                tipoTeste
+    ## 9278    Concluído 2020-06-17T03:00:00.000Z                   RT-PCR
+    ## 9711    Concluído 2020-06-22T03:00:00.000Z TESTE RÁPIDO - ANTICORPO
+    ## 11850   Concluído 2020-06-25T03:00:00.000Z  TESTE RÁPIDO - ANTÍGENO
+    ## 14810   Concluído 2020-06-17T03:00:00.000Z TESTE RÁPIDO - ANTICORPO
+    ## 14888   Concluído 2020-06-23T03:00:00.000Z TESTE RÁPIDO - ANTICORPO
+    ## 15693   Concluído 2020-06-17T03:00:00.000Z TESTE RÁPIDO - ANTICORPO
+    ##       resultadoTeste      sexo estadoNotificacao municipioNotificacao idade
+    ## 9278        Negativo Masculino         TOCANTINS            Araguaína    56
+    ## 9711        Negativo Masculino            PARANÁ             Curitiba    39
+    ## 11850       Positivo  Feminino         SÃO PAULO                Bauru    24
+    ## 14810       Negativo  Feminino            PARANÁ             Curitiba    46
+    ## 14888       Negativo Masculino            PARANÁ             Curitiba    30
+    ## 15693       Negativo Masculino            PARANÁ             Curitiba    44
+    ##               dataEncerramento             evolucaoCaso
+    ## 9278  2020-06-27T03:00:00.000Z Em tratamento domiciliar
+    ## 9711  2020-06-27T03:00:00.000Z                     Cura
+    ## 11850 2020-06-26T03:00:00.000Z Em tratamento domiciliar
+    ## 14810 2020-06-26T03:00:00.000Z                     Cura
+    ## 14888 2020-06-27T03:00:00.000Z                     Cura
+    ## 15693 2020-06-27T03:00:00.000Z                 Ignorado
 
 A quantidade de observações reduz bastante, porém facilita as próximas
 análises.
@@ -186,7 +211,7 @@ shp <- readOGR("Mapa\\.", "BR_UF_2020", stringsAsFactors=FALSE, encoding="UTF-8"
 ```
 
     ## OGR data source with driver: ESRI Shapefile 
-    ## Source: "C:\Users\geans\Documents\R\Mapa", layer: "BR_UF_2020"
+    ## Source: "C:\Users\geans\Documents\R\PI2B\Mapa", layer: "BR_UF_2020"
     ## with 27 features
     ## It has 4 fields
 
